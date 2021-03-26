@@ -1,4 +1,3 @@
-const { randomBytes, randomInt, randomFill } = require('crypto');
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -8,7 +7,7 @@ const router = express.Router()
 const imageStorage = multer.diskStorage({
     destination: 'images', // Destination to store image 
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '_' + randomInt(100000) + path.extname(file.originalname))
+        cb(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname))
         // file.fieldname is name of the field (image), path.extname get the uploaded file extension
     }
 });
