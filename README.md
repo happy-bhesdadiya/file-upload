@@ -10,6 +10,10 @@ In the project directory, you can run:
 
 Runs the app in the development mode.
 
-## Calling the single image API
+## Calling the single image upload API
 - Open Postman and create POST request for image upload
 - URL will be [localhost:3000/uploadImage](http://localhost:3000/uploadImage)
+- select Body in menus then select form-data
+- In table write the key name `image` and select type as a `file`
+- then after select any image (size less then 1MB).
+- And Send the request.
