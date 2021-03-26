@@ -23,10 +23,18 @@ const imageUpload = multer({
         }
         cb(undefined, true)
     }
-}).single('image')  // image is fieldname
+})  
 
-router.post('/uploadImage', imageUpload, (req, res) => {
-    res.send('Image has been uploaded successfully!')
+// For Single image upload
+router.post('/uploadImage', imageUpload.single('image'), (req, res) => {
+    res.send(req.file)
+}, (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
+})
+
+// For Multiple image uplaod
+router.post('/uploadBulkImage', imageUpload.array('images', 4), (req, res) => {
+    res.send(req.files)
 }, (error, req, res, next) => {
     res.status(400).send({ error: error.message })
 })
@@ -37,7 +45,7 @@ router.post('/uploadImage', imageUpload, (req, res) => {
 const videoStorage = multer.diskStorage({
     destination: 'videos', // Destination to store video 
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '_' + randomInt(100000) + path.extname(file.originalname))
+        cb(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname))
     }
 });
 
@@ -52,10 +60,10 @@ const videoUpload = multer({
         }
         cb(undefined, true)
     }
-}).single('video')  // video is fieldname
+})
 
-router.post('/uploadVideo', videoUpload, (req, res) => {
-    res.send('Video has been uploaded successfully!')
+router.post('/uploadVideo', videoUpload.single('video'), (req, res) => {
+    res.send(req.file)
 }, (error, req, res, next) => {
     res.status(400).send({ error: error.message })
 })
