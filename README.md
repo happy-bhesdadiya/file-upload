@@ -8,4 +8,8 @@ In the project directory, you can run:
 ### `npm install`
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
+
+## Calling the single image API
+- Open Postman and create POST request for image upload
+- URL will be `localhost:3000/uploadImage`
